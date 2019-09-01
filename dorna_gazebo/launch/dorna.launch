@@ -1,0 +1,52 @@
+<launch>    
+    <!-- #################### -->
+    <!-- start up empty world -->
+    <!-- #################### -->
+    <include file="$(find dorna_gazebo)/launch/gazebo.launch"/>
+
+    <!--####-->
+    <!--ARGS -->
+    <!--####-->
+    <arg name="controller_type" default="true"/> <!-- true=position or false=effort -->
+    <arg name="rviz_mode" default="true"/> 
+    <arg name="door_sim" default="false"/>
+    <arg name="agv_model" default="false"/>
+
+    <!-- ########################################### -->
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <!-- ########################################### -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find dorna_description)/urdf/dorna.urdf.xacro' transmission_type:=$(arg controller_type)" />
+    
+    <!-- ########### -->
+    <!-- Spawn robot -->
+    <!-- ########### -->
+    <node if="$(arg door_sim)" name="dorna_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-x 0.35 -y 0.5 -z 0.75 -J dorna_arm_0_to_dorna_arm_1 1.57 -J dorna_arm_1_to_dorna_arm_2 1.57 -unpause  -urdf -model dorna -param robot_description"/>
+    <node unless="$(arg door_sim)" name="dorna_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-unpause -urdf -model dorna -param robot_description"/>
+
+    <!-- ###################### -->
+    <!-- Start robot controller -->
+    <!-- ###################### -->
+    <include file="$(find dorna_control)/launch/dorna_control.launch">
+        <arg name="controller_type" value = "$(arg controller_type)" />
+    </include>
+
+    <!-- ########## -->
+    <!-- Spawn Door -->
+    <!-- ########## -->
+    <!-- <include if="$(arg door_sim)" file="$(find door_description)/launch/door.launch"/> -->
+
+    <!-- ######### -->
+    <!-- Spawn AGV -->
+    <!-- ######### -->
+    <!-- <include if="$(arg agv_model)" file="$(find agv_description)/launch/agv.launch">
+        <arg name="called" value="$(arg agv_model)"/>
+    </include> -->
+
+    <!-- #################################################################################### -->
+    <!-- launch moveit planner (ERROR Sometimes works, sometimes needs to launched seperatly)-->
+    <!-- #################################################################################### -->
+    <include file="$(find dorna_moveit_config)/launch/dorna_planning_execution.launch">
+        <arg name="rviz_mode" value="$(arg rviz_mode)"/>
+    </include>
+
+</launch>

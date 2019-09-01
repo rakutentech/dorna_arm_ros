@@ -1,0 +1,3 @@
+float64[] joint_angles
+---
+moveit_msgs/RobotTrajectory trajectory

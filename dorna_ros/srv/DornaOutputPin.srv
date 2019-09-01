@@ -1,0 +1,4 @@
+int32 pin
+bool state
+---
+bool active 

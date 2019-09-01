@@ -1,0 +1,7 @@
+string path
+int32 movement
+int32 speed
+float64[] joint_angles
+bool fulfill
+---
+bool response

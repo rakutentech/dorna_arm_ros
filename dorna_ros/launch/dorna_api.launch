@@ -1,0 +1,19 @@
+<launch>
+    <arg name="rviz_mode" default="true"/>
+    <arg name="gui_mode" default="false"/>
+    
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find dorna_description)/urdf/dorna.urdf.xacro' stand_alone:=true" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <remap from="/joint_states" to="/dorna/robot_info/joint_states" />
+    </node>
+
+    <include file="$(find dorna_moveit_config)/launch/dorna_real_planning_execution.launch">
+        <arg name="rviz_mode" value="$(arg gui_mode)"/>
+    </include>
+
+	<node if="$(arg rviz_mode)" name="rviz" pkg="rviz" type="rviz" args="-d $(find dorna_ros)/config/rviz/dorna_moveit_rviz_config.rviz"/>
+
+    <node name="dorna_ros" pkg="dorna_ros" type="dorna_ros_node.py" output="screen"/>
+    <node name="dorna_moveit_real" pkg="dorna_nodes" type="dorna_moveit_node" output="screen"/>
+</launch>

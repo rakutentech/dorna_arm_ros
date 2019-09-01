@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+
+<robot name="link_block" xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:property name="default_origin">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:property>
+
+    <xacro:macro name="collision_block" params="prt_name *origin *geometry">
+        <collision>
+        <xacro:insert_block name="origin"/>
+        <xacro:insert_block name="geometry"/>
+        </collision>
+    </xacro:macro>
+
+    <xacro:macro name="visual_block" params="prt_name *origin *geometry *material">
+        <visual>
+        <xacro:insert_block name = "origin"/>
+        <xacro:insert_block name = "geometry"/>
+        <xacro:insert_block name = "material"/>
+        </visual>
+    </xacro:macro>
+
+    <xacro:macro name="inertial_block" params="prt_name *mass *inertia">
+        <inertial>
+        <xacro:insert_block name = "default_origin"/>
+        <xacro:insert_block name = "mass"/>
+        <xacro:insert_block name = "inertia"/>
+        </inertial>
+    </xacro:macro>
+    
+    <xacro:macro name="link_block" params="prt_name *origin *geometry *mass *material *inertia">
+        <link name="${prt_name}">
+
+        <xacro:collision_block prt_name="${prt_name}">
+            <xacro:insert_block name="origin"/>
+            <xacro:insert_block name="geometry"/>
+        </xacro:collision_block>
+
+        <xacro:visual_block prt_name="${prt_name}">
+            <xacro:insert_block name="origin"/>
+            <xacro:insert_block name="geometry"/>
+            <xacro:insert_block name="material"/>
+        </xacro:visual_block>
+
+        <xacro:inertial_block prt_name="${prt_name}">
+            <xacro:insert_block name="mass"/>
+            <xacro:insert_block name="inertia"/>
+        </xacro:inertial_block>
+
+        </link>
+    </xacro:macro>
+</robot>

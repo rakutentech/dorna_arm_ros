@@ -1,0 +1,29 @@
+# joint_limits.yaml allows the dynamics properties specified in the URDF to be overwritten or augmented as needed
+# Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
+# Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
+joint_limits:
+  dorna_arm_0_to_dorna_arm_1:
+    has_velocity_limits: true
+    max_velocity: 2.618
+    has_acceleration_limits: false
+    max_acceleration: 0
+  dorna_arm_1_to_dorna_arm_2:
+    has_velocity_limits: true
+    max_velocity: 2.618
+    has_acceleration_limits: false
+    max_acceleration: 0
+  dorna_arm_2_to_dorna_arm_3:
+    has_velocity_limits: true
+    max_velocity: 5.236
+    has_acceleration_limits: false
+    max_acceleration: 0
+  dorna_arm_3_to_dorna_arm_4:
+    has_velocity_limits: true
+    max_velocity: 5.236
+    has_acceleration_limits: false
+    max_acceleration: 0
+  dorna_base_to_dorna_arm_0:
+    has_velocity_limits: true
+    max_velocity: 5.236
+    has_acceleration_limits: false
+    max_acceleration: 0

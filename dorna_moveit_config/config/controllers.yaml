@@ -1,0 +1,11 @@
+controller_list:
+  - name: /dorna/dorna_position_controller #/dorna/dorna_effort_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - dorna_base_to_dorna_arm_0
+      - dorna_arm_0_to_dorna_arm_1
+      - dorna_arm_1_to_dorna_arm_2
+      - dorna_arm_2_to_dorna_arm_3
+      - dorna_arm_3_to_dorna_arm_4

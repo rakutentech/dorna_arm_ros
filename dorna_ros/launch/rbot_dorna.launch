@@ -1,0 +1,48 @@
+<launch>
+    <arg name="controller_type" default="true"/> <!-- true=position or false=effort -->
+    <arg name="rviz_mode" default="false"/>
+    <arg name="gui_mode" default="false"/>
+    <arg name="camera_connected" default="true"/><!-- true=use camera or false=debug -->
+    
+    <!-- Load Rbot description -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find rbot_description)/urdf/rbot.urdf.xacro'" />
+
+    <!-- Load Rbot_moveit_config -->
+    <include file="$(find rbot_moveit_config)/launch/demo.launch">
+    </include>
+
+    <!-- Launch Realsense Camera -->
+	<include file="$(find realsense2_camera)/launch/rs_aligned_depth.launch">
+        <arg name="enable_pointcloud" value="true"/>
+    </include>
+
+
+    <!-- Launch Rviz -->
+	<node if="$(arg rviz_mode)" name="rviz" pkg="rviz" type="rviz" args="-d $(find dorna_ros)/config/rviz/dorna_rviz_config.rviz"/>
+
+    <!-- Run Robot Hand sensors -->
+    <node name="serial_node_hand" pkg="rosserial_arduino" type="serial_node.py">
+        <param name="port" value="/dev/sensors/hand"/>
+    </node>
+    
+    <!-- Run Robot pump controller -->
+    <node name="serial_node_pump" pkg="rosserial_arduino" type="serial_node.py">
+        <param name="port" value="/dev/actuators/pump"/>
+    </node>
+
+
+    <!-- Launch dorna robot -->
+    <node name="dorna_ros" pkg="dorna_ros" type="dorna_ros_node.py" output="screen"/>
+
+    <!-- Launch Move_Group -->
+    <node name="moveit_planning" pkg="dorna_nodes" type="dorna_moveit_node" output="screen"/>
+
+    <!-- Launch pix_2_world -->
+    <node name="pix_2_world" pkg="pix_2_world" type="Pix2World.py" output='screen'/>
+
+    <!-- Launch NN -->
+    <include file="$(find button_recognition)/launch/button_recognizer.launch"/>
+
+    <!-- Launch Object Detection -->
+    <include if="$(arg camera_connected)" file="$(find whill_apriltag_integration)/launch/tag_object_detection.launch"/>
+</launch>

@@ -1,0 +1,3 @@
+int32 cmd_input
+---
+moveit_msgs/RobotTrajectory trajectory

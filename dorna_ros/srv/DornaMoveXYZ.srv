@@ -1,0 +1,7 @@
+string path
+int32 movement
+int32 speed
+float64[] xyzab
+bool fulfill
+---
+bool response

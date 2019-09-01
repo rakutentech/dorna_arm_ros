@@ -1,0 +1,425 @@
+<?xml version="1.0"?>
+<robot name="dorna" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="dorna" params="parent *base_origin">
+
+    <!-- ############################## -->
+    <!-- Constants for robot dimensions -->
+    <!-- ############################## -->
+    <xacro:property name="PI" value="3.1415926535897931"/>
+    <xacro:property name="scale" value="0.01"/> <!-- scale the .STL to the right dim -->
+
+    <xacro:arg name="transmission_type" default="true" /> <!-- true = position controller; false = effort controller -->
+    <xacro:property name="transmission_type" value="$(arg transmission_type)" />
+    <!-- <xacro:property name="transmission_type" value="${transmission_type}" /> -->
+
+    <xacro:property name="default_origin">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:property>
+
+    <!-- ##################### -->
+    <!-- DORNA BASE PROPERTIES -->
+    <!-- ##################### -->
+    <xacro:property name="joint_speed_base" value="5.236" /> <!-- [rad/sec] -->
+    
+    <xacro:property name="joint_torque_base" value="50" /> <!-- [%] -->
+
+    <xacro:property name="dorna_base_mass">
+      <mass value = "0.848"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_base_color">
+      <material name="orange"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_base_origin">
+      <origin xyz="0 0 0" rpy="0 0 ${PI}"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_base_mesh">
+      <geometry>
+        <mesh filename="package://dorna_description/meshes/base_v8.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+    </xacro:property>
+
+    <xacro:property name="dorna_base_inertia"> <!-- [kg/m^2] -->
+      <inertia
+        ixx="2.569" ixy="0.001" ixz="0.089"
+        iyy="2.510" iyz="0.002"
+        izz="1.261"/>
+    </xacro:property>
+
+    <!-- ###################### -->
+    <!-- DORNA ARM 0 PROPERTIES -->
+    <!-- ###################### -->
+    <xacro:property name="joint_speed_arm" value="2.618" /> <!-- [rad/sec] -->
+    
+    <xacro:property name="joint_torque_arm" value="50" /> <!-- [%] -->
+
+    <xacro:property name="dorna_arm_0_mass">
+      <mass value = "1.579"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_0_color">
+      <material name="orange"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_0_origin">
+      <origin xyz="0.095 0 0.20603" rpy="0 0 0"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_0_mesh">
+      <geometry>
+        <mesh filename="package://dorna_description/meshes/j0_c.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_0_inertia"> <!-- [kg/m^2] -->
+      <inertia
+        ixx="28.253" ixy="0.0" ixz="-22.783"
+        iyy="53.228" iyz="0.0"
+        izz="34.568"/>
+    </xacro:property>
+
+    <!-- ###################### -->
+    <!-- DORNA ARM 1 PROPERTIES -->
+    <!-- ###################### -->
+    <xacro:property name="dorna_arm_1_mass">
+      <mass value = "0.709"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_1_color">
+      <material name="orange"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_1_origin">
+      <origin xyz="0.20327 0 0" rpy="0 0 0"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_1_mesh">
+      <geometry>
+        <mesh filename="package://dorna_description/meshes/j1_c.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_1_inertia"> <!-- [kg/m^2] -->
+      <inertia
+        ixx="1.049" ixy="0.0" ixz="0.0"
+        iyy="7.829" iyz="0.0"
+        izz="8.685"/>
+    </xacro:property>
+
+    <!-- ###################### -->
+    <!-- DORNA ARM 2 PROPERTIES -->
+    <!-- ###################### -->
+    <xacro:property name="dorna_arm_2_mass">
+      <mass value = "0.501"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_2_color">
+      <material name="orange"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_2_origin">
+      <origin xyz="0.15245 0 0" rpy="0 0 0"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_2_mesh">
+      <geometry>
+        <mesh filename="package://dorna_description/meshes/j2_c.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_2_inertia"> <!-- [kg/m^2] -->
+      <inertia
+        ixx="1.467" ixy="0.0" ixz="0.0"
+        iyy="10.271" iyz="0.0"
+        izz="11.492"/>
+    </xacro:property>
+
+    <!-- ###################### -->
+    <!-- DORNA ARM 3 PROPERTIES -->
+    <!-- ###################### -->
+    <xacro:property name="joint_speed_wrist" value="5.236" /> <!-- [rad/sec] -->
+    
+    <xacro:property name="joint_torque_wrist" value="50" /> <!-- [%] -->
+
+    <xacro:property name="dorna_arm_3_mass">
+      <mass value="0.075"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_3_color">
+      <material name="orange"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_3_origin">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:property>
+    
+    <xacro:property name="dorna_arm_3_mesh">
+      <geometry>
+        <mesh filename="package://dorna_description/meshes/j3_c.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_3_inertia"> <!-- [kg/m^2] -->
+      <inertia
+        ixx="0.03" ixy="0.0" ixz="0.0"
+        iyy="0.023" iyz="0.0"
+        izz="0.049"/>
+    </xacro:property>
+
+    <!-- ###################### -->
+    <!-- DORNA ARM 4 PROPERTIES -->
+    <!-- ###################### -->
+    <xacro:property name="dorna_arm_4_mass">
+      <mass value="0.042"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_4_color">
+      <material name="orange"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_4_origin">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_4_mesh">
+      <geometry>
+        <mesh filename="package://dorna_description/meshes/j4_c.stl" scale="${scale} ${scale} ${scale}"/>
+      </geometry>
+    </xacro:property>
+
+    <xacro:property name="dorna_arm_4_inertia"> <!-- [kg/m^2] -->
+      <inertia
+        ixx="0.002" ixy="0.0" ixz="0.0"
+        iyy="0.044" iyz="0.0"
+        izz="0.044"/>
+    </xacro:property>
+
+    <!-- ############################# -->
+    <!-- DORNA End Effector PROPERTIES -->
+    <!-- ############################# -->
+    <xacro:property name="dorna_end_effector_mass">
+      <mass value="0.042"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_end_effector_color">
+      <material name="blue"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_end_effector_origin">
+      <origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
+    </xacro:property>
+
+    <xacro:property name="dorna_end_effector_mesh">
+      <geometry>
+        <mesh filename="package://dorna_description/meshes/1_finger_tool.stl" scale="${0.001} ${0.001} ${0.001}"/>
+      </geometry>
+    </xacro:property>
+
+    <xacro:property name="dorna_end_effector_inertia"> <!-- [kg/m^2] -->
+      <inertia
+        ixx="0.002" ixy="0.0" ixz="0.0"
+        iyy="0.044" iyz="0.0"
+        izz="0.044"/>
+    </xacro:property>
+
+    <!-- ###### -->
+    <!-- MACROS -->
+    <!-- ###### -->
+    <xacro:include filename="$(find dorna_description)/urdf/link.macro.xacro"/>
+    <xacro:include filename="$(find dorna_description)/urdf/effort_transmission.macro.xacro"/>
+    <xacro:include filename="$(find dorna_description)/urdf/position_transmission.macro.xacro"/>
+    
+    <!-- ################################################################ -->
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+    <!-- ################################################################ -->
+    <xacro:include filename="$(find dorna_description)/urdf/dorna.gazebo" />
+
+    <!-- ################## -->
+    <!-- Import Rviz colors -->
+    <!-- ################## -->
+    <xacro:include filename="$(find dorna_description)/urdf/materials.xacro" />
+
+    <!-- ########################################### -->
+    <!-- Used for fixing robot to Gazebo 'base_link' -->
+    <!-- ########################################### -->
+    <!-- <link name="world"/> -->
+
+    <!-- ######################### -->
+    <!-- dorna_base Joint and Link -->
+    <!-- ######################### -->
+    <joint name="fixed" type="fixed">
+      <parent link="${parent}"/>
+      <child link="dorna_base"/>
+      <xacro:insert_block name="base_origin"/>
+      <!-- <xacro:insert_block name = "dorna_base_origin"/> -->
+    </joint>
+
+    <xacro:link_block prt_name="dorna_base">
+      <xacro:insert_block name = "default_origin"/>
+      <xacro:insert_block name = "dorna_base_mesh"/>
+      <xacro:insert_block name = "dorna_base_mass"/>
+      <xacro:insert_block name = "dorna_base_color"/>
+      <xacro:insert_block name = "dorna_base_inertia"/>
+    </xacro:link_block>
+
+    <!-- ########################## -->
+    <!-- dorna_arm_0 Joint and Link -->
+    <!-- ########################## -->
+    <joint name="dorna_base_to_dorna_arm_0" type="revolute">
+      <parent link="dorna_base"/>
+      <child link="dorna_arm_0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="${joint_torque_base}" lower="${-3.49}" upper="${3.05433}"  velocity="${joint_speed_base}"/> <!-- -175 deg, 175 deg -->
+      <!-- <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.88" soft_upper_limit="2.88" /> 10 degree saftey factor -->
+    </joint>
+
+    <xacro:link_block prt_name="dorna_arm_0">
+      <xacro:insert_block name = "dorna_arm_0_origin"/>
+      <xacro:insert_block name = "dorna_arm_0_mesh"/>
+      <xacro:insert_block name = "dorna_arm_0_mass"/>
+      <xacro:insert_block name = "dorna_arm_0_color"/>
+      <xacro:insert_block name = "dorna_arm_0_inertia"/>
+    </xacro:link_block>
+
+    <!-- ########################## -->
+    <!-- dorna_arm_1 Joint and Link -->
+    <!-- ########################## -->
+    <joint name="dorna_arm_0_to_dorna_arm_1" type="revolute">
+      <parent link="dorna_arm_0"/>
+      <child link="dorna_arm_1"/>
+      <origin xyz="0.095 0 0.20603" rpy="${PI} 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="${joint_torque_arm}" lower="${-3.05433}" upper="${2.79253}"  velocity="${joint_speed_arm}"/>  <!-- -175 deg, 160 deg -->
+      <!-- <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-1.5" soft_upper_limit="2.52" /> 10 degree saftey factor -->
+    </joint>
+
+    <xacro:link_block prt_name="dorna_arm_1">
+      <xacro:insert_block name = "dorna_arm_1_origin"/>
+      <xacro:insert_block name = "dorna_arm_1_mesh"/>
+      <xacro:insert_block name = "dorna_arm_1_mass"/>
+      <xacro:insert_block name = "dorna_arm_1_color"/>
+      <xacro:insert_block name = "dorna_arm_1_inertia"/>
+    </xacro:link_block>
+
+    <!-- ########################## -->
+    <!-- dorna_arm_2 Joint and Link -->
+    <!-- ########################## -->
+    <joint name="dorna_arm_1_to_dorna_arm_2" type="revolute">
+      <parent link="dorna_arm_1"/>
+      <child link="dorna_arm_2"/>
+      <origin xyz="0.20327 0 0" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="${joint_torque_arm}" lower="${-2.26893}" upper="${2.26893}"  velocity="${joint_speed_arm}"/> <!-- -130 deg, 130 deg -->
+      <!-- <safety_controller k_velocity="10" k_position="15" soft_lower_limit="-2.1" soft_upper_limit="2.1" /> 10 degree saftey factor -->
+    </joint>
+
+    <xacro:link_block prt_name="dorna_arm_2">
+      <xacro:insert_block name = "dorna_arm_2_origin"/>
+      <xacro:insert_block name = "dorna_arm_2_mesh"/>
+      <xacro:insert_block name = "dorna_arm_2_mass"/>
+      <xacro:insert_block name = "dorna_arm_2_color"/>
+      <xacro:insert_block name = "dorna_arm_2_inertia"/>
+    </xacro:link_block>
+
+    <!-- ########################## -->
+    <!-- dorna_arm_3 Joint and Link -->
+    <!-- ########################## -->
+    <joint name="dorna_arm_2_to_dorna_arm_3" type="continuous">
+      <parent link="dorna_arm_2"/>
+      <child link="dorna_arm_3"/>
+      <origin xyz="0.15245 0 0" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="${joint_torque_wrist}" lower="0" upper="${2*PI}"  velocity="${joint_speed_wrist}"/>
+    </joint>
+
+    <xacro:link_block prt_name="dorna_arm_3">
+      <xacro:insert_block name = "dorna_arm_3_origin"/>
+      <xacro:insert_block name = "dorna_arm_3_mesh"/>
+      <xacro:insert_block name = "dorna_arm_3_mass"/>
+      <xacro:insert_block name = "dorna_arm_3_color"/>
+      <xacro:insert_block name = "dorna_arm_3_inertia"/>
+    </xacro:link_block>
+
+    <!-- ########################## -->
+    <!-- dorna_arm_4 Joint and Link -->
+    <!-- ########################## -->
+    <joint name="dorna_arm_3_to_dorna_arm_4" type="continuous">
+      <parent link="dorna_arm_3"/>
+      <child link="dorna_arm_4"/>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="${joint_torque_wrist}" lower="0" upper="${2*PI}"  velocity="${joint_speed_wrist}"/>
+    </joint>
+
+    <xacro:link_block prt_name="dorna_arm_4">
+      <xacro:insert_block name = "dorna_arm_4_origin"/>
+      <xacro:insert_block name = "dorna_arm_4_mesh"/>
+      <xacro:insert_block name = "dorna_arm_4_mass"/>
+      <xacro:insert_block name = "dorna_arm_4_color"/>
+      <xacro:insert_block name = "dorna_arm_4_inertia"/>
+    </xacro:link_block>
+
+    <!-- ########################## -->
+    <!-- dorna_end_effector Joint and Link -->
+    <!-- ########################## -->
+    <joint name="dorna_arm_4_to_dorna_end_effector" type="fixed">
+      <parent link="dorna_arm_4"/>
+      <child link="dorna_end_effector"/>
+      <origin xyz="0.0315 0.0 0.0" rpy="0 0 ${-PI/2}"/>
+    </joint>
+
+    <xacro:link_block prt_name="dorna_end_effector">
+      <xacro:insert_block name = "dorna_end_effector_origin"/>
+      <xacro:insert_block name = "dorna_end_effector_mesh"/>
+      <xacro:insert_block name = "dorna_end_effector_mass"/>
+      <xacro:insert_block name = "dorna_end_effector_color"/>
+      <xacro:insert_block name = "dorna_end_effector_inertia"/>
+    </xacro:link_block>
+
+    <link name="finger_tip">
+    </link>
+
+    <joint name="dorna_end_effector_to_finger_tip" type="fixed">
+      <parent link="dorna_end_effector"/>
+      <child link="finger_tip"/>
+      <origin xyz="0 -0.102 0" rpy="${PI/2} 0 ${-PI/2}"/>
+    </joint>
+
+    <link name="pump">
+    </link>
+
+    <joint name="dorna_end_effector_to_pump" type="fixed">
+      <parent link="dorna_end_effector"/>
+      <child link="pump"/>
+      <origin xyz="0.09 -0.045 0" rpy="0 0 0"/>
+    </joint>
+    <!-- ############ -->
+    <!-- Transmission -->
+    <!-- ############ -->
+    <xacro:if value="${transmission_type}">
+      <xacro:position_transmission_macro tran_name="tran0_pos" joint_name="dorna_base_to_dorna_arm_0"  actuator_name="motor0_pos"/>
+      <xacro:position_transmission_macro tran_name="tran1_pos" joint_name="dorna_arm_0_to_dorna_arm_1" actuator_name="motor1_pos"/>
+      <xacro:position_transmission_macro tran_name="tran2_pos" joint_name="dorna_arm_1_to_dorna_arm_2" actuator_name="motor2_pos"/>
+      <xacro:position_transmission_macro tran_name="tran3_pos" joint_name="dorna_arm_2_to_dorna_arm_3" actuator_name="motor3_pos"/>
+      <xacro:position_transmission_macro tran_name="tran4_pos" joint_name="dorna_arm_3_to_dorna_arm_4" actuator_name="motor4_pos"/>
+    </xacro:if>
+
+    <xacro:unless value="${transmission_type}">
+      <xacro:effort_transmission_macro tran_name="tran0_eff" joint_name="dorna_base_to_dorna_arm_0" actuator_name="motor0_eff"/>
+      <xacro:effort_transmission_macro tran_name="tran1_eff" joint_name="dorna_arm_0_to_dorna_arm_1" actuator_name="motor1_eff"/>
+      <xacro:effort_transmission_macro tran_name="tran2_eff" joint_name="dorna_arm_1_to_dorna_arm_2" actuator_name="motor2_eff"/>
+      <xacro:effort_transmission_macro tran_name="tran3_eff" joint_name="dorna_arm_2_to_dorna_arm_3" actuator_name="motor3_eff"/>
+      <xacro:effort_transmission_macro tran_name="tran4_eff" joint_name="dorna_arm_3_to_dorna_arm_4" actuator_name="motor4_eff"/>
+    </xacro:unless>
+    
+    <!-- ############# -->
+    <!-- gazebo static -->
+    <!-- ############# -->
+    <gazebo> 
+      <static>false</static>
+    </gazebo>
+  </xacro:macro>
+</robot>

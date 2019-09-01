@@ -1,0 +1,26 @@
+digraph G {
+node [shape=box];
+"world" [label="world"];
+"dorna_base" [label="dorna_base"];
+"dorna_arm_0" [label="dorna_arm_0"];
+"dorna_arm_1" [label="dorna_arm_1"];
+"dorna_arm_2" [label="dorna_arm_2"];
+"dorna_arm_3" [label="dorna_arm_3"];
+"dorna_arm_4" [label="dorna_arm_4"];
+"dorna_end_effector" [label="dorna_end_effector"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"world" -> "fixed" [label="xyz: 0 0 0.7 \nrpy: 0 -0 0"]
+"fixed" -> "dorna_base"
+"dorna_base" -> "dorna_base_to_dorna_arm_0" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"dorna_base_to_dorna_arm_0" -> "dorna_arm_0"
+"dorna_arm_0" -> "dorna_arm_0_to_dorna_arm_1" [label="xyz: 0.095 0 0.20603 \nrpy: -3.14159 -0 0"]
+"dorna_arm_0_to_dorna_arm_1" -> "dorna_arm_1"
+"dorna_arm_1" -> "dorna_arm_1_to_dorna_arm_2" [label="xyz: 0.20327 0 0 \nrpy: 0 -0 0"]
+"dorna_arm_1_to_dorna_arm_2" -> "dorna_arm_2"
+"dorna_arm_2" -> "dorna_arm_2_to_dorna_arm_3" [label="xyz: 0.15245 0 0 \nrpy: 0 -0 0"]
+"dorna_arm_2_to_dorna_arm_3" -> "dorna_arm_3"
+"dorna_arm_3" -> "dorna_arm_3_to_dorna_arm_4" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"dorna_arm_3_to_dorna_arm_4" -> "dorna_arm_4"
+"dorna_arm_4" -> "dorna_arm_4_to_dorna_end_effector" [label="xyz: 0.0315 0 0 \nrpy: 0 0 -1.5708"]
+"dorna_arm_4_to_dorna_end_effector" -> "dorna_end_effector"
+}

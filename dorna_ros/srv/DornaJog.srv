@@ -1,0 +1,5 @@
+string path
+string axis
+int64 step_size
+---
+bool response

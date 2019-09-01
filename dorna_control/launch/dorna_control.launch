@@ -1,0 +1,28 @@
+<launch>
+    <!-- #### -->
+    <!-- Args -->
+    <!-- #### -->
+    <arg name="controller_type" default="true"/> <!-- True = Position and False = Effort -->
+
+    <!-- ####################################################################### -->
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <!-- ####################################################################### -->
+    <rosparam file="$(find dorna_control)/config/dorna_control.yaml" command="load"/>
+
+    <!-- ########################################### -->
+    <!-- Spawn Controller, Either position or Effort -->
+    <!-- ########################################### -->
+    <node if="$(arg controller_type)" name="$(anon controller_spawner)" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/dorna" 
+    args="joint_state_controller dorna_position_controller" />
+        
+    <node unless="$(arg controller_type)" name="$(anon controller_spawner)" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/dorna" 
+    args="joint_state_controller  dorna_effort_controller" />    
+
+    <!-- ######################################## -->
+    <!-- Remap joints states to correct namespace -->
+    <!-- ######################################## -->
+    <node name="$(anon robot_state_publisher)" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen" >
+        <remap from="/joint_states" to="/dorna/joint_states" />
+    </node>
+
+</launch>

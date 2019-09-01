@@ -1,0 +1,45 @@
+<launch>
+    <arg name="realsense"           default="true"/>
+    <arg name="rviz_mode"           default="true"/>
+    <arg name="gui_mode"            default="false"/>
+    <arg name="camera_connected"    default="false"/><!-- true=use camera or false=debug -->
+    
+    
+    <!-- ######################################################### -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <remap from="/joint_states" to="/dorna_real/robot_info/joint_states" />
+    </node>
+
+    <!-- ######################################################### -->
+    <include file="$(find dorna_moveit_config)/launch/dorna_real_planning_execution.launch">
+        <arg name="rviz_mode" value="$(arg gui_mode)"/>
+    </include>
+    
+    <!-- ######################################################### -->
+                    <!-- Starts camera on hand -->
+    <!-- ######################################################### -->
+    <include if="$(arg camera_connected)" file="$(find arm_vision)/launch/logicool.launch"/>
+
+	<node if="$(arg camera_connected)" pkg="tf" type="static_transform_publisher" name="robot_to_camera" args="0.09926 0 0.0265 -1.57 0 -1.57 dorna_base camera_link 100" />
+    
+    <!-- ######################################################### -->
+    <!-- Rviz launch -->
+    <!-- ######################################################### -->
+	<node if="$(arg rviz_mode)" name="rviz" pkg="rviz" type="rviz"/>
+
+    <node name="tf_transform" pkg="dorna_ros" type="tf_transform.py" output="screen"/>
+    <node unless="$(arg realsense)" name="button_demo_arm_test" pkg="dorna_ros" type="button_demo_arm_test.py" output="screen"/>
+
+    <include if="$(arg realsense)" file="$(find realsense2_camera)/launch/rs_aligned_depth.launch">
+        <!-- <param name="tf_prefix" value="realsense_camera_link"/> -->
+    </include>
+
+    <node if="$(arg realsense)" pkg="tf" type="static_transform_publisher" name="robot_to_camera" args="-0.35 0.038 0.400 -1.57 0 -1.57 dorna_base camera_link 100" />
+
+    <node if="$(arg realsense)" name="pix_2_world" pkg="pix_2_world" type="Pix2World.py" output="screen"/>
+
+    <!-- <node name="serial_node" pkg="rosserial_arduino" type="serial_node.py">
+        <param name="port" value="/dev/ttyACM0"/>
+    </node> -->
+
+</launch>
