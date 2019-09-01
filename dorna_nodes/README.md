@@ -3,12 +3,16 @@
     Maintainer: Mitchell Fogelson
 
 ## About
-    Description:  This package is for nodes to interface with the rest of the packages.  For example it contains a nodes to allow for a human interface to communicate to moveit and send execution to gazebo.
+This package is for nodes to interface with the rest of the packages.  
+
+For example it contains a nodes to allow Moveit_ros to be used with [dorna_ros](http://git.fut.rit/robotics/code/dorna_robot/dorna_ros).
 
 ## Nodes
-    dorna_moveit_real.py:
-        This node interfaces with the real robot through dorna_main and moveit_commander
+[dorna_moveit_ros.cpp](http://git.fut.rit/robotics/code/dorna_robot/dorna_nodes/blob/master/src/dorna_moveit_ros.cpp): A planning and executing interface between dorna_ros and Moveit_ros
+
+[dorna_moveit_real.py](http://git.fut.rit/robotics/code/dorna_robot/dorna_nodes/blob/master/src/dorna_moveit_real.cpp): A planning and executing interface between dorna_ros and Moveit_ros in Python
     
-    dorna_moveit_gazebo.py
-        This node is very similar to dorna_moveit_real.py, but creates an instance of the MoveitCommander for Dorna model in Gazebo.
+[dorna_moveit_gazebo.py](http://git.fut.rit/robotics/code/dorna_robot/dorna_nodes/blob/master/src/dorna_moveit_gazebo.cpp): This node is very similar to dorna_moveit_real.py, but creates an instance of the MoveitCommander for Dorna model in Gazebo.
+
+
         

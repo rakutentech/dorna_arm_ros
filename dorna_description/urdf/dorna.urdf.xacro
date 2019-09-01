@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <robot name="dorna" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:macro name="dorna" params="parent *base_origin">
+  <xacro:arg name="stand_alone" default="true" /> <!-- true = position controller; false = effort controller -->
+  <xacro:property name="stand_alone" value="$(arg stand_alone)"/>
 
+  <xacro:macro name="dorna" params="parent *base_origin">
     <!-- ############################## -->
     <!-- Constants for robot dimensions -->
     <!-- ############################## -->
@@ -28,7 +30,7 @@
     </xacro:property>
 
     <xacro:property name="dorna_base_color">
-      <material name="orange"/>
+      <material name="black"/>
     </xacro:property>
 
     <xacro:property name="dorna_base_origin">
@@ -148,7 +150,7 @@
     </xacro:property>
 
     <xacro:property name="dorna_arm_3_color">
-      <material name="orange"/>
+      <material name="red"/>
     </xacro:property>
 
     <xacro:property name="dorna_arm_3_origin">
@@ -176,7 +178,7 @@
     </xacro:property>
 
     <xacro:property name="dorna_arm_4_color">
-      <material name="orange"/>
+      <material name="red"/>
     </xacro:property>
 
     <xacro:property name="dorna_arm_4_origin">
@@ -208,12 +210,13 @@
     </xacro:property>
 
     <xacro:property name="dorna_end_effector_origin">
-      <origin xyz="0 0 0" rpy="0 ${-PI/2} 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:property>
 
     <xacro:property name="dorna_end_effector_mesh">
       <geometry>
-        <mesh filename="package://dorna_description/meshes/1_finger_tool.stl" scale="${0.001} ${0.001} ${0.001}"/>
+        <mesh filename="package://dorna_description/meshes/one_finger_asm.stl" scale="${0.001} ${0.001} ${0.001}"/>
+        <!-- <mesh filename="package://dorna_description/meshes/1_finger_tool.stl" scale="${0.001} ${0.001} ${0.001}"/> -->
       </geometry>
     </xacro:property>
 
@@ -368,7 +371,7 @@
     <joint name="dorna_arm_4_to_dorna_end_effector" type="fixed">
       <parent link="dorna_arm_4"/>
       <child link="dorna_end_effector"/>
-      <origin xyz="0.0315 0.0 0.0" rpy="0 0 ${-PI/2}"/>
+      <origin xyz="0.0315 0.0 0.0" rpy="0 ${-PI/2} ${PI/2}"/>
     </joint>
 
     <xacro:link_block prt_name="dorna_end_effector">
@@ -422,4 +425,13 @@
       <static>false</static>
     </gazebo>
   </xacro:macro>
+
+  <xacro:if value="${stand_alone}">
+    <link name="world">
+    </link>
+
+    <xacro:dorna parent="world">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:dorna>
+  </xacro:if>
 </robot>

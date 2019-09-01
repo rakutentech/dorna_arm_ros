@@ -151,7 +151,7 @@ class MoveitGazeboInterface():
 		except TypeError:
 			raise
 
- 	def go_orientation_target(self, q):
+	def go_orientation_target(self, q):
 		"""q should be a list"""
 		try:
 			if type(q) == list and len(q) == 4:

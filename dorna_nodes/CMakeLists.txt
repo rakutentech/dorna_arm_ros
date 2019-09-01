@@ -2,20 +2,22 @@ cmake_minimum_required(VERSION 2.8.3)
 project(dorna_nodes)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-Wall -Wextra -O3 -g)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  dorna_ros
   gazebo_ros
+  geometry_msgs
+  moveit_core
+  moveit_msgs
+  moveit_ros_planning_interface
   roscpp
   rospy
   std_msgs
-	moveit_commander
-	moveit_msgs
-	geometry_msgs
-  dorna_api
+  std_srvs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -121,7 +123,9 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+#  include
+)
+include_directories(SYSTEM
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -138,22 +142,26 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/rrbot_nodes_node.cpp)
+add_executable(${PROJECT_NAME}_dorna_moveit_node src/dorna_moveit_ros.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
+set_target_properties(${PROJECT_NAME}_dorna_moveit_node PROPERTIES OUTPUT_NAME dorna_moveit_node PREFIX "")
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_dorna_moveit_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(${PROJECT_NAME}_dorna_moveit_node
+  ${catkin_LIBRARIES}
+)
+
+target_compile_features(${PROJECT_NAME}_dorna_moveit_node
+  PRIVATE cxx_std_17
+)
 
 #############
 ## Install ##
