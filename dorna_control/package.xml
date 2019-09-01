@@ -4,11 +4,11 @@
   <version>0.0.0</version>
   <description>The dorna_control package</description>
 
-  <maintainer email="mitchell.fogelson@rakuten.com">Mitchell Fogelson</maintainer>
+  <maintainer email="mfogelson630@gmail.com">Mitchell Fogelson</maintainer>
 
-  <license>BSD</license>
+  <license>MIT</license>
 
-  <author email="mitchell.fogelson@rakuten.com">Mitchell Fogelson</author>
+  <author email="mfogelson630@gmail.com">Mitchell Fogelson</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
