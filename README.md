@@ -18,6 +18,9 @@ rosdep install --from-paths src --ignore-src --rosdistro=ROSDISTRO -r -y
 catkin_make
 ```
 
+**Note:** See [dorna_ros](https://github.com/rakutentech/dorna_arm_ros/tree/master/dorna_ros) for more detailed instruction including how to install udev rule for Dorna arm and more
+
+
 ## Quick Start
 
 **Dorna Robot ROS**:
