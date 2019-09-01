@@ -1,7 +1,8 @@
 ## Dorna Arm ROS 
     Author: Mitchell Fogelson
-    Email: mitchell.fogelson@rakuten.com
+    Email: mfogelson630@gmail.com
     
+**Note** I am not affiliated in any way the developement of Dorna Arm
 ## Dorna_robot Installation Guide
 
 Clone:
