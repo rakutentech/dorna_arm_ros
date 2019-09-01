@@ -1,4 +1,4 @@
-## Dorna Robot Rakuten
+## Dorna Arm ROS 
     Author: Mitchell Fogelson
     Email: mitchell.fogelson@rakuten.com
     
@@ -6,60 +6,52 @@
 
 Clone:
    
- ```git clone https://github.com/rakutentech/dorna_arm_ros/```
+ ```
+ cd ~/catkin_ws/src
+ git clone https://github.com/rakutentech/dorna_arm_ros.git
+ ```
 
-## RoS Dependencies
-Gazebo 9
-gazebo_ros
-ros_control
-ros_controllers
-moveit
-joint_state_publisher
-robot_state_publisher
+Download Dependencies:
+```
+cd ~/catkin_ws
+rosdep install --from-paths src --ignore-src --rosdistro=ROSDISTRO -r -y
+catkin_make
+```
 
 ## Quick Start
 
-Dorna Robot:
-    See dorna_api for more information
+**Dorna Robot ROS**:
 
-    Launching: 
-    roslaunch dorna_api dorna_api.launch
-    rosrun dorna_api dorna_main.py
-    rosrun dorna_nodes dorna_moveit_real.py
+See [dorna_ros](https://github.com/rakutentech/dorna_arm_ros/dorna_ros) for more information
 
-Dorna Gazebo:
-    See dorna_gazebo for more information
+```
+roslaunch dorna_ros dorna_ros.launch
+```
+**Dorna Gazebo Simulation**:
 
-    Launching:
-    roslaunch dorna_gazebo dorna.launch
-    rosrun dorna_nodes dorna_moveit_gazebo.py
+See [dorna_gazebo](https://github.com/rakutentech/dorna_arm_ros/dorna_gazebo) for more information
 
-    [Warning: If the above launching sequence fails it is probably due to dorna_planning_execution.launch being launched too soon.  You may need to use this launch sequence instead and comment out the include in the dorna.launch.]
-
-    Launching:
-    roslaunch dorna_gazebo dorna.launch
-    roslaunch dorna_moveit_config dorna_planning_execution.launch
-    rosrun dorna_nodes dorna_moveit_gazebo.py
+```
+roslaunch dorna_gazebo dorna.launch
+rosrun dorna_nodes dorna_moveit_gazebo.py
+```
 
 ## Packages
+[dorna_control](https://github.com/rakutentech/dorna_arm_ros/dorna_control):
+This package interfaces with ros_control to allow moveit to control the Gazebo model
 
-dorna_api:
-    This package interfaces with the actual robot.
-    dorna_main.py --> Is the ROS wrapper for the robot
-    dorna_robot.py --> Is the API interface for the robot
-    dorna_planner.py --> Is a message converter for the robot
+[dorna_description](https://github.com/rakutentech/dorna_arm_ros/dorna_description):
+This package is Xacro and URDF descriptions that interface with Rviz and Gazebo.
 
-dorna_description:
-    This package is Xacro and URDF descriptions that interface with Rviz and Gazebo.
+[dorna_gazebo](https://github.com/rakutentech/dorna_arm_ros/dorna_gazebo):
+This package simply launches the various models both Dorna and enviornment related.
 
-dorna_control:
-    This package interfaces with ros_control to allow moveit to control the Gazebo model
+[dorna_moveit_config](https://github.com/rakutentech/dorna_arm_ros/dorna_moveit_config):
+This package controls all the moveit interface with both gazebo and the real robot
 
-dorna_gazebo:
-    This package simply launches the various models both Dorna and enviornment related.
+[dorna_nodes](https://github.com/rakutentech/dorna_arm_ros/dorna_nodes): 
+This package contains any nodes that may not directly fit within the other packages mentioned above
 
-dorna_moveit_config:
-    This package controls all the moveit interface with both gazebo and the real robot
+[dorna_ros](https://github.com/rakutentech/dorna_arm_ros/dorna_ros):
+This package interfaces with the actual robot.
 
-dorna_nodes: 
-    This package contains any nodes that may not directly fit within the other packages mentioned above
