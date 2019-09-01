@@ -1,13 +1,13 @@
 <package>
   <name>dorna_gazebo</name>
-  <version>0.1.0</version>
+  <version>0.0.0</version>
   <description>dorna_gazebo</description>
-  <maintainer email="mitchell.fogelson@rakuten.com">Mitchell Fogelson</maintainer>
+  <maintainer email="mfogelson630@gmail.com">Mitchell Fogelson</maintainer>
 
-  <license>BSD</license>
+  <license>MIT</license>
 
 
-  <author email="mitchell.fogelson@rakuten.com">Mitchell Fogelson</author>
+  <author email="mfogelson630@gmail.com">Mitchell Fogelson</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>dorna_description</build_depend>
