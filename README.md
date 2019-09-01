@@ -6,15 +6,7 @@
 
 Clone:
    
- ```git clone http://git.rit/robotics/code/dorna_robot/dorna_robot.git```
-
-Move to directory:
-  
-```cd dorna_robot/```
-
-Update submodules:
-   
-```git submodule update --init --recursive```
+ ```git clone https://github.com/rakutentech/dorna_arm_ros/```
 
 ## RoS Dependencies
 Gazebo 9
