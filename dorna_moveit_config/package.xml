@@ -5,10 +5,10 @@
   <description>
      An automatically generated package with all the configuration and launch files for using the dorna with the MoveIt! Motion Planning Framework
   </description>
-  <author email="mitchell.fogelson@rakuten.com">Mitchell Fogelson</author>
-  <maintainer email="mitchell.fogelson@rakuten.com">Mitchell Fogelson</maintainer>
+  <author email="mfogelson630@gmail.com">Mitchell Fogelson</author>
+  <maintainer email="mfogelson630@gmail.com">Mitchell Fogelson</maintainer>
 
-  <license>BSD</license>
+  <license>MIT</license>
 
   <url type="website">http://moveit.ros.org/</url>
   <url type="bugtracker">https://github.com/ros-planning/moveit/issues</url>
