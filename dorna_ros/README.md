@@ -57,7 +57,7 @@ This will allow your computer to recognize the Dorna Robotic Arm when it is plug
 
   *Note: This can cause issues if you have more then 1 Dorna robot or Arduino Due plugged in*
 ```
-cd ~/catkin_ws/src/dorna_robot/dorna_ros
+cd ~/catkin_ws/src/dorna_arm_ros/dorna_ros
 ./dorna_udev_install.sh
 ```
 Unplug then replug in device
