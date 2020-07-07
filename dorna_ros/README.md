@@ -43,7 +43,7 @@ Notes:
 2. Clone repository
 ```
 cd ~/catkin_ws/src
-git clone http://git.fut.rit/robotics/code/dorna_robot/dorna_ros.git
+git clone https://github.com/rakutentech/dorna_arm_ros/dorna_ros.git
 cd dorna_ros
 pip3 install catkin_pkg
 pip3 install rospkg
